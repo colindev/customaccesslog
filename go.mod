@@ -1,4 +1,4 @@
-module customaccesslog
+module github.com/colindev/customaccesslog
 
 go 1.17
 
