@@ -29,6 +29,7 @@ func Test_CustomLog(t *testing.T) {
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest("GET", "https://1.2.3.4:8000", nil)
 	r.Header.Set("X-Forwarded-For", "255.255.255.255, 244.244.244.244, 233.233.233.233, 222.222.222.222, 211.211.211.211, 200.200.200.200")
+	r.Header.Set("X-Cloud-Trace-Context", "dfeg33r3r23r32r23rrw/1234567;o=1")
 	be, _ := url.Parse("https://echo.colindev.io/api")
 	RecordBackend(r, be)
 

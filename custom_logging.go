@@ -66,6 +66,9 @@ func WriteCustomLog(writer io.Writer, params handlers.LogFormatterParams) {
 	buf = append(buf, " upstream("...)
 	buf = append(buf, time.Now().Sub(params.TimeStamp).String()...)
 	buf = append(buf, ")"...)
+	if traceCtx := params.Request.Header.Get("X-Cloud-Trace-Context"); traceCtx != "" {
+		buf = append(buf, traceCtx...)
+	}
 	if ctxValue := params.Request.Context().Value(errKey); ctxValue != nil {
 		if e, ok := ctxValue.(*CtxErr); ok && e.Err != nil {
 			buf = append(buf, " err: "...)
