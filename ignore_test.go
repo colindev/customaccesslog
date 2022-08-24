@@ -19,7 +19,7 @@ func Test_Ignores(t *testing.T) {
 	for pattern, strs := range dataMatchs {
 		Ignore(pattern)
 		for _, s := range strs {
-			if !Match(s) {
+			if !IsIgnore(s) {
 				t.Errorf("pattern [%s] match [%s] fail\n", pattern, s)
 			}
 		}

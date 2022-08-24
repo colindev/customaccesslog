@@ -14,7 +14,7 @@ func Ignore(pattern string) {
 	defaultIgnores.ps = append(defaultIgnores.ps, regexp.MustCompile(pattern))
 }
 
-func Match(str string) bool {
+func IsIgnore(str string) bool {
 	b := []byte(str)
 	for _, re := range defaultIgnores.ps {
 		if re.Match(b) {

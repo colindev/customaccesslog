@@ -58,6 +58,9 @@ func RequestCtxWithError(r *http.Request, err error) {
 
 // implement gorilla/handlers/LogFormatter
 func WriteCustomLog(writer io.Writer, params handlers.LogFormatterParams) {
+	if IsIgnore(params.URL.Path) {
+		return
+	}
 	buf := buildCommonLogLine(params.Request, params.URL, params.TimeStamp, params.StatusCode, params.Size)
 	buf = append(buf, fmt.Sprintf(" XFF(%s)", params.Request.Header.Get("X-Forwarded-For"))...)
 	buf = append(buf, " host("...)
